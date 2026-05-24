@@ -220,8 +220,8 @@ select {
 
 .custom-tooltip {
     position: absolute;
-    left: 40%;
-    top: -20px;
+    left: 50%;
+    top: -40px;
     background-color: rgba(51, 65, 85, 0.9);
     border: 1px solid #94a3b8;
     padding: 8px 12px;
@@ -231,6 +231,14 @@ select {
     z-index: 10;
     pointer-events: none;
     line-height: 1.4;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+    white-space: nowrap;
+}
+
+.bar-row:hover .custom-tooltip {
+    opacity: 1;
 }
 
 /* KPI Cards */
