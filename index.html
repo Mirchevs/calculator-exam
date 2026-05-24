@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LeadPredictor</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="dashboard">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <i class="fas fa-filter"></i>
+                <h2>LeadPredictor</h2>
+            </div>
+            
+            <div class="form-group">
+                <label>Language</label>
+                <div class="select-wrapper">
+                    <select>
+                        <option>🇺🇸 English</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label>Currency</label>
+                <div class="select-wrapper">
+                    <select>
+                        <option>$ US Dollar</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label>Campaign Start</label>
+                <input type="date" value="2026-05-08">
+            </div>
+            
+            <div class="form-group">
+                <label>Campaign End</label>
+                <input type="date" value="2026-11-04">
+            </div>
+            
+            <div class="form-group">
+                <label>Total Revenue</label>
+                <div class="input-with-icon">
+                    <span class="currency-symbol">$</span>
+                    <input type="number" id="totalRevenue" value="10000">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label>Avg. Order Value</label>
+                <div class="input-with-icon">
+                    <span class="currency-symbol">$</span>
+                    <input type="number" id="avgOrderValue" value="1000">
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="top-row">
+                <!-- Chart Area -->
+                <div class="chart-container">
+                    <div class="chart-y-axis">
+                        <span>1</span>
+                        <span>2</span>
+                        <span>3</span>
+                        <span>4</span>
+                        <span>5</span>
+                        <span>6</span>
+                        <div class="y-label">Months</div>
+                    </div>
+                    <div class="chart-bars">
+                        <div class="chart-grid">
+                            <div class="grid-line"></div>
+                            <div class="grid-line"></div>
+                            <div class="grid-line"></div>
+                            <div class="grid-line"></div>
+                            <div class="grid-line"></div>
+                            <div class="grid-line"></div>
+                        </div>
+                        
+                        <!-- Bars (mock representation) -->
+                        <div class="bar-row">
+                            <div class="bar bar-customer" style="width: 5%"></div>
+                            <div class="bar bar-lead" style="width: 10%"></div>
+                            <div class="bar bar-prospect" style="width: 25%"></div>
+                        </div>
+                        <div class="bar-row">
+                            <div class="bar bar-customer" style="width: 8%"></div>
+                            <div class="bar bar-lead" style="width: 15%"></div>
+                            <div class="bar bar-prospect" style="width: 40%"></div>
+                        </div>
+                        <div class="bar-row relative">
+                            <!-- Tooltip for Month 3 -->
+                            <div class="custom-tooltip">
+                                Month #3<br>
+                                Prospects: 63<br>
+                                Leads: 13<br>
+                                Customers: 5
+                            </div>
+                            <div class="bar bar-customer" style="width: 12%"></div>
+                            <div class="bar bar-lead" style="width: 20%"></div>
+                            <div class="bar bar-prospect" style="width: 50%"></div>
+                        </div>
+                        <div class="bar-row">
+                            <div class="bar bar-customer" style="width: 15%"></div>
+                            <div class="bar bar-lead" style="width: 25%"></div>
+                            <div class="bar bar-prospect" style="width: 70%"></div>
+                        </div>
+                        <div class="bar-row">
+                            <div class="bar bar-customer" style="width: 18%"></div>
+                            <div class="bar bar-lead" style="width: 30%"></div>
+                            <div class="bar bar-prospect" style="width: 85%"></div>
+                        </div>
+                        <div class="bar-row">
+                            <div class="bar bar-customer" style="width: 20%"></div>
+                            <div class="bar bar-lead" style="width: 35%"></div>
+                            <div class="bar bar-prospect" style="width: 100%"></div>
+                        </div>
+                    </div>
+                    <div class="chart-x-axis">
+                        <span>0 people</span>
+                        <span>20 people</span>
+                        <span>40 people</span>
+                        <span>60 people</span>
+                        <span>80 people</span>
+                        <span>100 people</span>
+                        <span>120 people</span>
+                    </div>
+                </div>
+                
+                <!-- KPI Cards -->
+                <div class="kpi-cards">
+                    <div class="kpi-card">
+                        <div class="kpi-header">
+                            <span><i class="fas fa-folder"></i> Prospects</span>
+                            <span>100%</span>
+                        </div>
+                        <h3 id="prospectsValue">125</h3>
+                        <div class="progress-bar"><div class="fill" style="width: 100%;"></div></div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-header">
+                            <span><i class="fas fa-user"></i> Leads</span>
+                            <span>20%</span>
+                        </div>
+                        <h3 id="leadsValue">25</h3>
+                        <div class="progress-bar"><div class="fill" style="width: 20%;"></div></div>
+                    </div>
+                    <div class="kpi-card light-theme-text">
+                        <div class="kpi-header">
+                            <span><i class="fas fa-trophy"></i> Customers</span>
+                            <span>8%</span>
+                        </div>
+                        <h3 id="customersValue">10</h3>
+                        <div class="progress-bar"><div class="fill bg-dark" style="width: 8%;"></div></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Sliders -->
+            <div class="bottom-sliders">
+                <div class="slider-group">
+                    <label>Lead Response Rate</label>
+                    <div class="slider-container">
+                        <input type="range" min="0" max="100" value="40" class="slider" id="leadRate">
+                    </div>
+                    <div class="slider-value-display"><span id="leadRateValue">40.00%</span></div>
+                </div>
+                <div class="slider-group">
+                    <label>Prospect Response Rate</label>
+                    <div class="slider-container">
+                        <input type="range" min="0" max="100" value="20" class="slider" id="prospectRate">
+                    </div>
+                    <div class="slider-value-display"><span id="prospectRateValue">20.00%</span></div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
