@@ -1,4 +1,49 @@
+const translations = {
+    en: {
+        language: "Language",
+        currency: "Currency",
+        campaignStart: "Campaign Start",
+        campaignEnd: "Campaign End",
+        totalRevenue: "Total Revenue",
+        avgOrderValue: "Avg. Order Value",
+        months: "Months",
+        people: "people",
+        prospects: "Prospects",
+        leads: "Leads",
+        customers: "Customers",
+        leadResponseRate: "Lead Response Rate",
+        prospectResponseRate: "Prospect Response Rate",
+        monthLabel: "Month",
+        prospectsLabel: "Prospects",
+        leadsLabel: "Leads",
+        customersLabel: "Customers"
+    },
+    bg: {
+        language: "Език",
+        currency: "Валута",
+        campaignStart: "Начало на кампания",
+        campaignEnd: "Край на кампания",
+        totalRevenue: "Общи приходи",
+        avgOrderValue: "Средна стойност на поръчка",
+        months: "Месеци",
+        people: "души",
+        prospects: "Потенциали",
+        leads: "Възможности",
+        customers: "Клиенти",
+        leadResponseRate: "Процент на възможности",
+        prospectResponseRate: "Процент на потенциали",
+        monthLabel: "Месец",
+        prospectsLabel: "Потенциали",
+        leadsLabel: "Възможности",
+        customersLabel: "Клиенти"
+    }
+};
+
 document.addEventListener('DOMContentLoaded', () => {
+    let currentLang = 'en';
+
+    const languageSelect = document.getElementById('languageSelect');
+
     const leadRateSlider = document.getElementById('leadRate');
     const prospectRateSlider = document.getElementById('prospectRate');
     const leadRateValue = document.getElementById('leadRateValue');
@@ -13,6 +58,34 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const barRows = document.querySelectorAll('.bar-row');
     const xAxis = document.querySelector('.chart-x-axis');
+
+    function updateLanguage() {
+        currentLang = languageSelect.value;
+        const i18nElements = document.querySelectorAll('[data-i18n]');
+        i18nElements.forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            if (translations[currentLang][key]) {
+                el.childNodes.forEach(child => {
+                    // Update only text nodes to preserve icons (like i.fas inside)
+                    if (child.nodeType === Node.TEXT_NODE && child.textContent.trim() !== "") {
+                        child.nodeValue = " " + translations[currentLang][key] + " ";
+                    } else if (child.nodeType === Node.TEXT_NODE && el.childNodes.length === 1) {
+                         el.textContent = translations[currentLang][key];
+                    }
+                });
+                
+                // If it doesn't have child nodes nicely set up or just text
+                if (el.childNodes.length === 0 || (el.childNodes.length === 1 && el.childNodes[0].nodeType === Node.TEXT_NODE)) {
+                    el.textContent = translations[currentLang][key];
+                }
+            }
+        });
+        updateCalculator();
+    }
+
+    if (languageSelect) {
+        languageSelect.addEventListener('change', updateLanguage);
+    }
 
     function updateCalculator() {
         const leadRate = parseFloat(leadRateSlider.value);
@@ -42,10 +115,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Update X Axis
         xAxis.innerHTML = '';
+        const t = translations[currentLang];
         for (let i = 0; i <= 6; i++) {
             const val = Math.round((maxVal / 6) * i);
             const span = document.createElement('span');
-            span.textContent = val + (i === 6 ? ' people' : '');
+            span.textContent = val + (i === 6 ? ` ${t.people}` : '');
             xAxis.appendChild(span);
         }
 
@@ -72,7 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Update tooltip data
             const tooltip = row.querySelector('.custom-tooltip');
             if (tooltip) {
-                tooltip.innerHTML = `Month #${m}<br>Prospects: ${m_prospects}<br>Leads: ${m_leads}<br>Customers: ${m_customers}`;
+                tooltip.innerHTML = `${t.monthLabel} #${m}<br>${t.prospectsLabel}: ${m_prospects}<br>${t.leadsLabel}: ${m_leads}<br>${t.customersLabel}: ${m_customers}`;
             }
         });
     }
