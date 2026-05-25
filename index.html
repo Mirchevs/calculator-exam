@@ -17,16 +17,17 @@
             </div>
             
             <div class="form-group">
-                <label>Language</label>
+                <label data-i18n="language">Language</label>
                 <div class="select-wrapper">
-                    <select>
-                        <option>🇺🇸 English</option>
+                    <select id="languageSelect">
+                        <option value="en">🇺🇸 English</option>
+                        <option value="bg">🇧🇬 Български</option>
                     </select>
                 </div>
             </div>
             
             <div class="form-group">
-                <label>Currency</label>
+                <label data-i18n="currency">Currency</label>
                 <div class="select-wrapper">
                     <select>
                         <option>$ US Dollar</option>
@@ -35,17 +36,17 @@
             </div>
             
             <div class="form-group">
-                <label>Campaign Start</label>
+                <label data-i18n="campaignStart">Campaign Start</label>
                 <input type="date" value="2026-05-08">
             </div>
             
             <div class="form-group">
-                <label>Campaign End</label>
+                <label data-i18n="campaignEnd">Campaign End</label>
                 <input type="date" value="2026-11-04">
             </div>
             
             <div class="form-group">
-                <label>Total Revenue</label>
+                <label data-i18n="totalRevenue">Total Revenue</label>
                 <div class="input-with-icon">
                     <span class="currency-symbol">$</span>
                     <input type="number" id="totalRevenue" value="10000">
@@ -53,7 +54,7 @@
             </div>
             
             <div class="form-group">
-                <label>Avg. Order Value</label>
+                <label data-i18n="avgOrderValue">Avg. Order Value</label>
                 <div class="input-with-icon">
                     <span class="currency-symbol">$</span>
                     <input type="number" id="avgOrderValue" value="1000">
@@ -73,7 +74,7 @@
                         <span>4</span>
                         <span>5</span>
                         <span>6</span>
-                        <div class="y-label">Months</div>
+                        <div class="y-label" data-i18n="months">Months</div>
                     </div>
                     <div class="chart-bars">
                         <div class="chart-grid">
@@ -138,7 +139,7 @@
                 <div class="kpi-cards">
                     <div class="kpi-card">
                         <div class="kpi-header">
-                            <span><i class="fas fa-folder"></i> Prospects</span>
+                            <span><i class="fas fa-folder"></i> <span data-i18n="prospects">Prospects</span></span>
                             <span>100%</span>
                         </div>
                         <h3 id="prospectsValue">125</h3>
@@ -146,7 +147,7 @@
                     </div>
                     <div class="kpi-card">
                         <div class="kpi-header">
-                            <span><i class="fas fa-user"></i> Leads</span>
+                            <span><i class="fas fa-user"></i> <span data-i18n="leads">Leads</span></span>
                             <span>20%</span>
                         </div>
                         <h3 id="leadsValue">25</h3>
@@ -154,7 +155,7 @@
                     </div>
                     <div class="kpi-card light-theme-text">
                         <div class="kpi-header">
-                            <span><i class="fas fa-trophy"></i> Customers</span>
+                            <span><i class="fas fa-trophy"></i> <span data-i18n="customers">Customers</span></span>
                             <span>8%</span>
                         </div>
                         <h3 id="customersValue">10</h3>
@@ -166,14 +167,14 @@
             <!-- Bottom Sliders -->
             <div class="bottom-sliders">
                 <div class="slider-group">
-                    <label>Lead Response Rate</label>
+                    <label data-i18n="leadResponseRate">Lead Response Rate</label>
                     <div class="slider-container">
                         <input type="range" min="0" max="100" value="40" class="slider" id="leadRate">
                     </div>
                     <div class="slider-value-display"><span id="leadRateValue">40.00%</span></div>
                 </div>
                 <div class="slider-group">
-                    <label>Prospect Response Rate</label>
+                    <label data-i18n="prospectResponseRate">Prospect Response Rate</label>
                     <div class="slider-container">
                         <input type="range" min="0" max="100" value="20" class="slider" id="prospectRate">
                     </div>
