@@ -43,6 +43,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentLang = 'en';
 
     const languageSelect = document.getElementById('languageSelect');
+    const currencySelect = document.getElementById('currencySelect');
+    const currencySymbols = document.querySelectorAll('.currency-symbol');
 
     const leadRateSlider = document.getElementById('leadRate');
     const prospectRateSlider = document.getElementById('prospectRate');
@@ -85,6 +87,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (languageSelect) {
         languageSelect.addEventListener('change', updateLanguage);
+    }
+    
+    if (currencySelect) {
+        currencySelect.addEventListener('change', (e) => {
+            const sym = e.target.value;
+            currencySymbols.forEach(el => el.textContent = sym);
+        });
     }
 
     function updateCalculator() {
