@@ -29,8 +29,9 @@
             <div class="form-group">
                 <label data-i18n="currency">Currency</label>
                 <div class="select-wrapper">
-                    <select>
-                        <option>$ US Dollar</option>
+                    <select id="currencySelect">
+                        <option value="€">€ Euro</option>
+                        <option value="$">$ US Dollar</option>
                     </select>
                 </div>
             </div>
@@ -48,7 +49,7 @@
             <div class="form-group">
                 <label data-i18n="totalRevenue">Total Revenue</label>
                 <div class="input-with-icon">
-                    <span class="currency-symbol">$</span>
+                    <span class="currency-symbol">€</span>
                     <input type="number" id="totalRevenue" value="10000">
                 </div>
             </div>
@@ -56,7 +57,7 @@
             <div class="form-group">
                 <label data-i18n="avgOrderValue">Avg. Order Value</label>
                 <div class="input-with-icon">
-                    <span class="currency-symbol">$</span>
+                    <span class="currency-symbol">€</span>
                     <input type="number" id="avgOrderValue" value="1000">
                 </div>
             </div>
