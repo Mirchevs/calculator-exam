@@ -58,8 +58,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const leadsValue = document.getElementById('leadsValue');
     const prospectsValue = document.getElementById('prospectsValue');
 
-    const barRows = document.querySelectorAll('.bar-row');
+    const chartYAxis = document.getElementById('chartYAxis');
+    const chartBars = document.getElementById('chartBars');
     const xAxis = document.querySelector('.chart-x-axis');
+    
+    const campaignStartInput = document.getElementById('campaignStart');
+    const campaignEndInput = document.getElementById('campaignEnd');
 
     function updateLanguage() {
         currentLang = languageSelect.value;
@@ -131,39 +135,78 @@ document.addEventListener('DOMContentLoaded', () => {
             span.textContent = val + (i === 6 ? ` ${t.people}` : '');
             xAxis.appendChild(span);
         }
+        
+        // Calculate Month duration
+        let monthsDuration = 1;
+        if (campaignStartInput && campaignEndInput) {
+            const start = new Date(campaignStartInput.value);
+            const end = new Date(campaignEndInput.value);
+            if (!isNaN(start) && !isNaN(end) && end >= start) {
+                monthsDuration = (end.getFullYear() - start.getFullYear()) * 12 + (end.getMonth() - start.getMonth()) + 1;
+            }
+        }
+        
+        // Render Y Axis and Bars dynamically based on duration
+        
+        // Clear old specific dynamic elements but keep the grid and y label
+        const yLabel = chartYAxis.querySelector('.y-label');
+        chartYAxis.innerHTML = '';
+        if (yLabel) chartYAxis.appendChild(yLabel);
+        
+        const chartGrid = chartBars.querySelector('.chart-grid');
+        chartBars.innerHTML = '';
+        if (chartGrid) chartBars.appendChild(chartGrid);
 
         // Update Bars (Stacked horizontally: Customer + Lead + Prospect = Total Prospects)
-        barRows.forEach((row, index) => {
-            const m = index + 1; // Month 1 to 6
-            const m_customers = Math.round((customers / 6) * m);
-            const m_leads = Math.round((leads / 6) * m);
-            const m_prospects = Math.round((prospects / 6) * m);
+        for (let m = 1; m <= monthsDuration; m++) {
+            // Y-axis label
+            const ySpan = document.createElement('span');
+            ySpan.textContent = m;
+            chartYAxis.appendChild(ySpan);
+            
+            // Generate rows
+            const row = document.createElement('div');
+            row.className = 'bar-row relative';
+            
+            const cBar = document.createElement('div');
+            cBar.className = 'bar bar-customer';
+            const lBar = document.createElement('div');
+            lBar.className = 'bar bar-lead';
+            const pBar = document.createElement('div');
+            pBar.className = 'bar bar-prospect';
+            const tooltip = document.createElement('div');
+            tooltip.className = 'custom-tooltip';
+            
+            row.appendChild(cBar);
+            row.appendChild(lBar);
+            row.appendChild(pBar);
+            row.appendChild(tooltip);
+            chartBars.appendChild(row);
+
+            const m_customers = Math.round((customers / monthsDuration) * m);
+            const m_leads = Math.round((leads / monthsDuration) * m);
+            const m_prospects = Math.round((prospects / monthsDuration) * m);
 
             // Compute stacked percentages based on max prospects
             const c_pct = (m_customers / maxVal) * 100;
             const l_pct = ((m_leads - m_customers) / maxVal) * 100;
             const p_pct = ((m_prospects - m_leads) / maxVal) * 100;
-
-            const cBar = row.querySelector('.bar-customer');
-            const lBar = row.querySelector('.bar-lead');
-            const pBar = row.querySelector('.bar-prospect');
             
             cBar.style.width = `${c_pct}%`;
             lBar.style.width = `${Math.max(0, l_pct)}%`; // prevent negative
             pBar.style.width = `${Math.max(0, p_pct)}%`; // prevent negative
 
             // Update tooltip data
-            const tooltip = row.querySelector('.custom-tooltip');
-            if (tooltip) {
-                tooltip.innerHTML = `${t.monthLabel} #${m}<br>${t.prospectsLabel}: ${m_prospects}<br>${t.leadsLabel}: ${m_leads}<br>${t.customersLabel}: ${m_customers}`;
-            }
-        });
+            tooltip.innerHTML = `${t.monthLabel} #${m}<br>${t.prospectsLabel}: ${m_prospects}<br>${t.leadsLabel}: ${m_leads}<br>${t.customersLabel}: ${m_customers}`;
+        }
     }
 
     leadRateSlider.addEventListener('input', updateCalculator);
     prospectRateSlider.addEventListener('input', updateCalculator);
     totalRevenueInput.addEventListener('input', updateCalculator);
     avgOrderValueInput.addEventListener('input', updateCalculator);
+    if(campaignStartInput) campaignStartInput.addEventListener('change', updateCalculator);
+    if(campaignEndInput) campaignEndInput.addEventListener('change', updateCalculator);
     
     // Initialize
     updateCalculator();

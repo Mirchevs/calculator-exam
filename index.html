@@ -38,12 +38,12 @@
             
             <div class="form-group">
                 <label data-i18n="campaignStart">Campaign Start</label>
-                <input type="date" value="2026-05-08">
+                <input type="date" id="campaignStart" value="2026-05-08">
             </div>
             
             <div class="form-group">
                 <label data-i18n="campaignEnd">Campaign End</label>
-                <input type="date" value="2026-11-04">
+                <input type="date" id="campaignEnd" value="2026-11-04">
             </div>
             
             <div class="form-group">
@@ -68,16 +68,11 @@
             <div class="top-row">
                 <!-- Chart Area -->
                 <div class="chart-container">
-                    <div class="chart-y-axis">
-                        <span>1</span>
-                        <span>2</span>
-                        <span>3</span>
-                        <span>4</span>
-                        <span>5</span>
-                        <span>6</span>
+                    <div class="chart-y-axis" id="chartYAxis">
+                        <!-- Dynamic Month Labels -->
                         <div class="y-label" data-i18n="months">Months</div>
                     </div>
-                    <div class="chart-bars">
+                    <div class="chart-bars" id="chartBars">
                         <div class="chart-grid">
                             <div class="grid-line"></div>
                             <div class="grid-line"></div>
@@ -88,42 +83,6 @@
                         </div>
                         
                         <!-- Dynamic Bars via Script -->
-                        <div class="bar-row relative">
-                            <div class="bar bar-customer"></div>
-                            <div class="bar bar-lead"></div>
-                            <div class="bar bar-prospect"></div>
-                            <div class="custom-tooltip"></div>
-                        </div>
-                        <div class="bar-row relative">
-                            <div class="bar bar-customer"></div>
-                            <div class="bar bar-lead"></div>
-                            <div class="bar bar-prospect"></div>
-                            <div class="custom-tooltip"></div>
-                        </div>
-                        <div class="bar-row relative">
-                            <div class="bar bar-customer"></div>
-                            <div class="bar bar-lead"></div>
-                            <div class="bar bar-prospect"></div>
-                            <div class="custom-tooltip"></div>
-                        </div>
-                        <div class="bar-row relative">
-                            <div class="bar bar-customer"></div>
-                            <div class="bar bar-lead"></div>
-                            <div class="bar bar-prospect"></div>
-                            <div class="custom-tooltip"></div>
-                        </div>
-                        <div class="bar-row relative">
-                            <div class="bar bar-customer"></div>
-                            <div class="bar bar-lead"></div>
-                            <div class="bar bar-prospect"></div>
-                            <div class="custom-tooltip"></div>
-                        </div>
-                        <div class="bar-row relative">
-                            <div class="bar bar-customer"></div>
-                            <div class="bar bar-lead"></div>
-                            <div class="bar bar-prospect"></div>
-                            <div class="custom-tooltip"></div>
-                        </div>
                     </div>
                     <div class="chart-x-axis">
                         <span>0 people</span>
